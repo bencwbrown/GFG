@@ -103,16 +103,30 @@ Two methods of rendering:
 
 \end{frame}
 
-\begin{frame}{Pipeline Stages}
+\begin{frame}{Stages of the Graphics Pipeline}
 
-	The main stages of the pipeline are:
+	Roughly, the main stages of the pipeline are:
+
+	\begin{enumerate}
+		\item \emphbf{application};
+		\item \emphbf{geometry processing};
+		\item \emphbf{rasterisation};
+		\item \emphbf{pixel processing}.
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{The Application Stage}
+
+	Involves tasks typically implemented by the software running on general-purpose CPUs:
 
 	\begin{itemize}
-		\item Given a virtual camera, 3d objects, light sources, etc., render a 2d image;
+		\item collision detection;
+		\item global acceleration algorithms;
+		\item animation;
+		\item physics simulation;
+		\item etc., \ldots
 	\end{itemize}
-
-	\vskip 1cm
-
 
 \end{frame}
 

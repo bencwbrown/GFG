@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  24 SEP 2022 16:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  24 SEP 2022 21:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -945,14 +945,17 @@ thkerncmss.
 
 ] [5
 
+] [6
+
 ]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-49.
- (/usr/local/texlive/2022/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [6
+63.
 
-] [7
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) [7
+
+] [8
 
 ]
 \tf@nav=\write6
@@ -964,15 +967,16 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
- (./main.aux)
+
+(./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22885 strings out of 475075
- 443574 string characters out of 5779003
+ 22899 strings out of 475075
+ 443877 string characters out of 5779003
  756775 words of memory out of 5000000
- 43783 multiletter control sequences out of 15000+600000
+ 43795 multiletter control sequences out of 15000+600000
  488041 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,11n,122p,427b,459s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -991,10 +995,10 @@ ocal/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/loc
 al/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local
 /texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/t
 exlive/2022/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on main.pdf (7 pages, 149597 bytes).
+Output written on main.pdf (8 pages, 153424 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
+ 136 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
