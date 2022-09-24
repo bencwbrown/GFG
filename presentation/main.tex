@@ -51,8 +51,68 @@ Two methods of rendering:
 
 \begin{itemize}
 	\item \emphbf{object-order rendering}: for each \textcolor{blue}{object}, which \textcolor{red}{pixels} are influenced by it?
+		\begin{itemize}
+			\item Example: rasterisation.
+		\end{itemize}
 	\item \emphbf{image-order rendering}: for each \textcolor{red}{pixel}, which \textcolor{blue}{object} is influenced by it?
+		\begin{itemize}
+			\item Example: ray-tracing.
+		\end{itemize}
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Real-Time Rendering}
+
+	\emphbf{Real-time rendering} refers to the process of rendering a scene in less than 1/30\textsuperscript{th} of a second (i.e., refresh rate $>$ 30 Hz).
+
+	\begin{itemize}
+		\item Real-time rendering refers to rendering that is fast enough to allow for the user's \emphbf{real-time interaction}.
+		\item As little as 15 ms of temporal delay can slow and interfere with the interactivity.
+	\end{itemize}
+
+	\vskip 1cm
+
+	So speed is essential for interactivity:
+
+	\begin{itemize}
+		\item For a 1080p image at 90 Hz, an image-order rendering iteration would need to be performed 186,624,000 times per second.
+		\item Object-order rendering is (usually) faster in this case.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{The Graphics Pipeline}
+
+	The main function of the \emphbf{graphics pipeline} is:
+
+	\begin{itemize}
+		\item Given a virtual camera, 3d objects, light sources, etc., render a 2d image;
+		\item Object locations and shapes determined by their geometry, environment,  camera placement, etc.;
+		\item Object appearance affected by material, light sources, shading, etc.
+	\end{itemize}
+
+	\vskip 1cm
+
+	Some key ideas regarding the pipeline are:
+
+	\begin{itemize}
+		\item Consists of several states, with each making up part of a larger task;
+		\item The states execute in parallel, with each stage dependent on the result from the previous.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Pipeline Stages}
+
+	The main stages of the pipeline are:
+
+	\begin{itemize}
+		\item Given a virtual camera, 3d objects, light sources, etc., render a 2d image;
+	\end{itemize}
+
+	\vskip 1cm
+
 
 \end{frame}
 
