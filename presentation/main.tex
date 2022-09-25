@@ -114,6 +114,13 @@ Two methods of rendering:
 		\item \emphbf{pixel processing}.
 	\end{enumerate}
 
+	\vskip 1cm
+
+	\begin{figure}[t]
+		\includegraphics[width=8cm]{main-pipeline}
+		\centering
+	\end{figure}
+
 \end{frame}
 
 \begin{frame}{The Application Stage}
@@ -122,14 +129,83 @@ Two methods of rendering:
 
 	\begin{itemize}
 		\item collision detection;
-		\item global acceleration algorithms;
 		\item animation;
-		\item physics simulation;
-		\item etc., \ldots
+		\item physics simulation, etc...
+	\end{itemize}
+
+	\vskip 1cm
+
+	More specifically, the application stage:
+
+	\begin{itemize}
+		\item Reads \emphbf{primitive} data and assembles it into primitives for later states.
+		\begin{itemize}
+			\item Vertex data (position, normal vectors, colour, etc.),
+		\end{itemize}
+		\item Initialises GPU allocated memory buffers.
+		\begin{itemize}
+			\item Vertex and index buffers.
+		\end{itemize}
 	\end{itemize}
 
 \end{frame}
 
+\begin{frame}{The Geometry Processing Stage}
+
+	Responsible for the per-triangle and per-vertex operations:
+
+	\begin{itemize}
+		\item Vertex processing (transforming and shading);
+		\item Projecting;
+		\item Clipping;
+		\item Screen mapping.
+	\end{itemize}
+
+	\vskip 1cm
+
+	\begin{figure}[t]
+		\includegraphics[width=8cm]{geometry-pipeline}
+		\centering
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Geometry Processing Stage}
+
+	\emphbf{Vertex shading} deals with:
+
+	\begin{itemize}
+		\item Determining the effect of a light on a material (\emphbf{shading});
+		\item Projecting from \emphbf{world space} onto \emphbf{view space};
+		\item \emphbf{Clipping} away the view space primitives which do not lie within the view volume;
+		\item Mapping the vertices onto \emphbf{screen space};
+	\end{itemize}
+
+	\vskip 1cm
+
+	\begin{itemize}
+		\item
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Rasteristaion}
+
+	The \emphbf{rasterisation} stage converts vector information (composed of primitives) into a raster image (composed of pixels). It includes:
+
+	\begin{itemize}
+		\item Dividing by $z$ for perspective;
+		\item Mapping primitives to a 2D viewport;
+		\item Determining how to invoke the pixel.
+	\end{itemize}
+
+	\vskip 1cm
+
+	\begin{itemize}
+		\item
+	\end{itemize}
+
+\end{frame}
 
 
 \begin{frame}{Tables and Figures}
