@@ -41,12 +41,7 @@
 
 \begin{frame}{The Key Idea}
 
-Basic task in computer graphics is \emphbf{render} 3-dimensional objects:
-
-\begin{itemize}
-  \item given a scene composed of geometric objects in 3d space;
-  \item produce a 2d image showing the objects from a specific viewpoint.
-\end{itemize}
+Aim is to \emphbf{render} 3d objects on 2d screen
 
 \vskip 1cm
 
@@ -54,40 +49,51 @@ Two methods of rendering:
 
 \begin{itemize}
 	\item \emphbf{object-order rendering}: for each \textcolor{blue}{object}, which \textcolor{red}{pixels} are influenced by it?
-		\begin{itemize}
-			\item Example: rasterisation.
-		\end{itemize}
 	\item \emphbf{image-order rendering}: for each \textcolor{red}{pixel}, which \textcolor{blue}{object} is influenced by it?
-		\begin{itemize}
-			\item Example: ray-tracing.
-		\end{itemize}
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Object- vs. Image-Order Rendering}
+
+	\begin{figure}
+		\centering
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{image-order}
+			\caption{Image-order rendering.}
+		\end{minipage}%
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{object-order}
+			\caption{Object-order rendering.}
+		\end{minipage}
+	\end{figure}
 
 \end{frame}
 
 \begin{frame}{Real-Time Rendering}
 
-	\emphbf{Real-time rendering} refers to the process of rendering a scene in less than 1/30\textsuperscript{th} of a second (i.e., refresh rate $>$ 30 Hz).
+	\emphbf{Real-time} refers to rendering a scene in less than 1/30\textsuperscript{th} of a second.
 
 	\begin{itemize}
-		\item Real-time rendering refers to rendering that is fast enough to allow for the user's \emphbf{real-time interaction}.
-		\item As little as 15 ms of temporal delay can slow and interfere with the interactivity.
+		\item Fast enough to allow for the user's \emphbf{real-time interaction}.
+		\item Temporal delay of 15 ms of temporal delay can interfere with the interactivity.
 	\end{itemize}
 
 	\vskip 1cm
 
-	So speed is essential for interactivity:
+	Speed is essential!
 
 	\begin{itemize}
-		\item For a 1080p image at 90 Hz, an image-order rendering iteration would need to be performed 186,624,000 times per second.
-		\item Object-order rendering is (usually) faster in this case.
+		\item 1080p image at 90 Hz, image-order rendering needs 186,624,000 iterations times per second!
 	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{The Graphics Pipeline}
 
-	The main function of the \emphbf{graphics pipeline} is:
+	Object-order rendering uses the \emphbf{graphics pipeline}:
 
 	\begin{itemize}
 		\item Given a virtual camera, 3d objects, light sources, etc., render a 2d image;
@@ -97,55 +103,48 @@ Two methods of rendering:
 
 	\vskip 1cm
 
-	Some key ideas regarding the pipeline are:
-
-	\begin{itemize}
-		\item Consists of several states, with each making up part of a larger task;
-		\item The states execute in parallel, with each stage dependent on the result from the previous.
-	\end{itemize}
+	The states execute in parallel; each stage depends on the previous.
 
 \end{frame}
 
 \begin{frame}{Stages of the Graphics Pipeline}
 
-	Roughly, the main stages of the pipeline are:
-
-	\begin{enumerate}
-		\item \emphbf{application};
-		\item \emphbf{geometry processing};
-		\item \emphbf{rasterisation};
-		\item \emphbf{pixel processing}.
-	\end{enumerate}
+	Roughly, these stages are:
 
 	\vskip 1cm
 
 	\begin{figure}[t]
-		\includegraphics[width=8cm]{main-pipeline}
+		\includegraphics[width=10cm]{main-pipeline}
+		\centering
+	\end{figure}
+
+	\vskip 1cm
+
+	Geometry processing, rasterisation, and pixel processing happen within the \emphbf{GPU}.
+
+\end{frame}
+
+\begin{frame}{Stages of the Graphics Pipeline}
+
+	\begin{figure}[t]
+		\includegraphics[width=10cm]{pipeline-2}
 		\centering
 	\end{figure}
 
 \end{frame}
 
-\begin{frame}{The Application Stage}
+\begin{frame}{Application Stage}
 
-	Involves tasks typically implemented by the software running on general-purpose CPUs:
-
-	\begin{itemize}
-		\item collision detection;
-		\item animation;
-		\item physics simulation, etc...
-	\end{itemize}
+	The \emphbf{application} on the \emphbf{CPU} supplies the data about the scene to the \emphbf{GPU}:
 
 	\vskip 1cm
 
-	More specifically, the application stage:
-
 	\begin{itemize}
-		\item Reads \emphbf{primitive} data and assembles it into primitives for later states.
+		\item \emphbf{Primitive} data:
 		\begin{itemize}
 			\item Vertex data (position, normal vectors, colour, etc.),
 		\end{itemize}
-		\item Initialises GPU allocated memory buffers.
+		\item Initialises GPU memory \emphbf{buffers}:
 		\begin{itemize}
 			\item Vertex and index buffers.
 		\end{itemize}
@@ -153,9 +152,9 @@ Two methods of rendering:
 
 \end{frame}
 
-\begin{frame}{The Geometry Processing Stage}
+\begin{frame}{Geometry Processing Stage}
 
-	Responsible for the per-triangle and per-vertex operations:
+	Performs per-triangle and per-vertex operations:
 
 	\begin{itemize}
 		\item Vertex processing (transforming and shading);
@@ -167,46 +166,51 @@ Two methods of rendering:
 	\vskip 1cm
 
 	\begin{figure}[t]
-		\includegraphics[width=8cm]{geometry-pipeline}
+		\includegraphics[width=10cm]{geometry-pipeline}
 		\centering
 	\end{figure}
-
-\end{frame}
-
-\begin{frame}{Geometry Processing Stage -- Vertex Processing}
-
-	\emphbf{Vertex shading} deals with:
-
-	\begin{itemize}
-		\item Determining the effect of a light on a material (\emphbf{shading});
-		\item Projecting from \emphbf{world space} onto \emphbf{view space};
-		\item \emphbf{Clipping} away the view space primitives which do not lie within the view volume;
-		\item Mapping the vertices onto \emphbf{screen space};
-	\end{itemize}
-
-	\vskip 1cm
-
-	\begin{itemize}
-		\item
-	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{The Geometry Stage -- Transformations}
 
-
-%	\begin{itemize}
-%		\item
-%	\end{itemize}
-
-	\vskip 1cm
-
 	\begin{figure}[t]
-		\includegraphics[width=10cm]{coordinate-systems}
+		\includegraphics[width=11cm]{coordinate-systems}
 		\centering
 	\end{figure}
 
 \end{frame}
+
+\begin{frame}{The Geometry Stage -- Local-to-View Space}
+
+	\begin{figure}[t]
+		\includegraphics[width=11cm]{view-transform}
+		\centering
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Geometry Stage -- Vertex Shading}
+
+	\begin{figure}[t]
+		\includegraphics[width=11cm]{clipping}
+		\centering
+	\end{figure}
+
+\end{frame}
+
+%\begin{frame}{Geometry Processing Stage -- Vertex Processing}
+%
+%	\emphbf{Vertex shading} deals with:
+%
+%	\begin{itemize}
+%		\item Determining the effect of a light on a material (\emphbf{shading});
+%		\item Projecting from \emphbf{world space} onto \emphbf{view space};
+%		\item \emphbf{Clipping} away the view space primitives which do not lie within the view volume;
+%		\item Mapping the vertices onto \emphbf{screen space};
+%	\end{itemize}
+%
+%\end{frame}
 
 \begin{frame}{The Rasterisation Stage}
 
@@ -232,18 +236,49 @@ Two methods of rendering:
 		\item Example -- fragment data from interpolation.
 	\end{itemize}
 
+%	\vskip 1cm
+
+	\begin{figure}
+		\centering
+		\begin{minipage}{.35\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{triangle}
+%			\caption{Vertex colour values.}
+		\end{minipage}%
+		$\longmapsto$
+		\begin{minipage}{.35\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{interpolation}
+%			\caption{Interpolated fragment colour values.}
+		\end{minipage}
+	\end{figure}
+
+	\begin{figure}[t]
+		\includegraphics[height=3cm]{interpolation-2}
+		\centering
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Rasterisation Stage -- Pixel Shading}
+
+	\begin{itemize}
+		\item Example -- light shading.
+	\end{itemize}
+
 	\vskip 1cm
 
 	\begin{figure}
 		\centering
-		\begin{minipage}{.45\textwidth}
+		\begin{minipage}{.5\textwidth}
 			\centering
-			\includegraphics[width=.8\linewidth]{triangle}
+			\includegraphics[width=.8\linewidth]{shading-1}
+			\caption{Per-vertex shading.}
 		\end{minipage}%
-		$\longmapsto$
-		\begin{minipage}{.45\textwidth}
+		\begin{minipage}{.5\textwidth}
 			\centering
-			\includegraphics[width=.8\linewidth]{interpolation}
+			\includegraphics[width=.8\linewidth]{shading-2}
+			\caption{Per-fragment shading.}
 		\end{minipage}
 	\end{figure}
 
@@ -267,51 +302,42 @@ Two methods of rendering:
 \begin{frame}{The Rasterisation Stage -- Merging}
 
 	\begin{itemize}
-		\item Example -- texture mapping.
+		\item Storing pixels in a colour buffer;
+		\item With a depth- or $z$-buffer.
+	\end{itemize}
+
+%	\vskip 1cm
+
+	\begin{figure}
+		\centering
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{depth-1}
+			\caption{No depth sorting.}
+		\end{minipage}%
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{depth-2}
+			\caption{With depth sorting.}
+		\end{minipage}
+	\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Final Remarks}
+
+	Modern day 3d graphics APIs include:
+
+	\begin{itemize}
+		\item Vulkan/OpenGL (Khronos Group);
+		\item Direct3D (Microsoft);
+		\item Metal (Apple).
 	\end{itemize}
 
 	\vskip 1cm
 
-
-\end{frame}
-
-
-\begin{frame}{Tables and Figures}
-
-\begin{itemize}
-\item Use \texttt{tabular} for basic tables --- see Table~\ref{tab:widgets}, for example.
-\item You can upload a figure (JPEG, PNG or PDF) using the files menu.
-\item To include it in your document, use the \texttt{includegraphics} command (see the comment below in the source code).
-\end{itemize}
-
-\begin{block}{Examples}
-	Some examples of commonly used commands and features are included, to help you get started.
-\end{block}
-
-% Commands to include a figure:
-%\begin{figure}
-%\includegraphics[width=\textwidth]{your-figure's-file-name}
-%\caption{\label{fig:your-figure}Caption goes here.}
-%\end{figure}
-
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
-
-\end{frame}
-
-\begin{frame}{Readable Mathematics}
-
-Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-\[ S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i \]
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+	The pipeline performs parallel and regular computations $\implies$ GPUs are specialised for this!
 
 \end{frame}
 
