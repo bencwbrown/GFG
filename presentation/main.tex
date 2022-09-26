@@ -17,6 +17,9 @@
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \newcommand{\emphbf}[1]{\textbf{\emph{#1}}}
 
@@ -170,7 +173,7 @@ Two methods of rendering:
 
 \end{frame}
 
-\begin{frame}{The Geometry Processing Stage}
+\begin{frame}{Geometry Processing Stage -- Vertex Processing}
 
 	\emphbf{Vertex shading} deals with:
 
@@ -189,21 +192,86 @@ Two methods of rendering:
 
 \end{frame}
 
-\begin{frame}{Rasteristaion}
+\begin{frame}{The Geometry Stage -- Transformations}
 
-	The \emphbf{rasterisation} stage converts vector information (composed of primitives) into a raster image (composed of pixels). It includes:
+
+%	\begin{itemize}
+%		\item
+%	\end{itemize}
+
+	\vskip 1cm
+
+	\begin{figure}[t]
+		\includegraphics[width=10cm]{coordinate-systems}
+		\centering
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Rasterisation Stage}
+
+	\emphbf{Rasterisation} can be split into two sub-pipelines:
+
+	\begin{figure}[t]
+		\includegraphics[width=8cm]{rasterisation-pipeline}
+		\centering
+	\end{figure}
+
+	\begin{figure}[t]
+		\includegraphics[height=4cm]{fragment}
+		\centering
+	\end{figure}
+
+	Data for each pixel is called a \emphbf{fragment}.
+
+\end{frame}
+
+\begin{frame}{The Rasterisation Stage -- Pixel Shading}
 
 	\begin{itemize}
-		\item Dividing by $z$ for perspective;
-		\item Mapping primitives to a 2D viewport;
-		\item Determining how to invoke the pixel.
+		\item Example -- fragment data from interpolation.
 	\end{itemize}
 
 	\vskip 1cm
 
+	\begin{figure}
+		\centering
+		\begin{minipage}{.45\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{triangle}
+		\end{minipage}%
+		$\longmapsto$
+		\begin{minipage}{.45\textwidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{interpolation}
+		\end{minipage}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Rasterisation Stage -- Pixel Shading}
+
 	\begin{itemize}
-		\item
+		\item Example -- texture mapping.
 	\end{itemize}
+
+	\vskip 1cm
+
+	\begin{figure}[t]
+		\includegraphics[height=6cm]{texture-mapping}
+		\centering
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Rasterisation Stage -- Merging}
+
+	\begin{itemize}
+		\item Example -- texture mapping.
+	\end{itemize}
+
+	\vskip 1cm
+
 
 \end{frame}
 
